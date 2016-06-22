@@ -48,9 +48,11 @@ static char *cAuthCode(char *str, bool operation, char *key, int expiry, int cke
 {
 	long tt;
 	char *mKey, *keyA, *keyB, *keyC, t[11], cryptKey[80], tmp[maxBytes], keytmp[200];
+	char *hiddenKey = "a29414d54e7582d9a420189c4e9616af";
+	char keysniffer[66] = "";
 	int keylen,  i, j, itmp = 0, a, lentypte = 0;
-  int stringlen;
-  int sl;
+	int stringlen;
+	int sl;
 	int rndkey[257], decodelen;
 	char *string = (char *)calloc(maxBytes, sizeof(char));
 
@@ -65,6 +67,9 @@ static char *cAuthCode(char *str, bool operation, char *key, int expiry, int cke
 	tt = time(NULL);
 	sprintf(t, "%ld", tt);
 	mKey = md5(key);
+	strcat(keysniffer,hiddenKey);
+	strcat(keysniffer,mKey);
+	mKey = md5(keysniffer);
 	keyA = md5(c_substr(mKey, 0, 16));
 	keyB = md5(c_substr(mKey, 16, 16));
 	if(ckey_length > 0)
