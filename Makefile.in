@@ -1,0 +1,7 @@
+PHP_SCREW_SHARED_LIBADD = libphpscrewext.so
+LTLIBRARY_NAME		= libscrew.la
+LTLIBRARY_SOURCES	= php_screw_plus.c
+LTLIBRARY_SHARED_NAME	= php_screw_plus.la
+LTLIBRARY_SHARED_LIBADD	= $(PHP_SCREW_SHARED_LIBADD)
+
+include $(top_srcdir)/build/dynlib.mk
