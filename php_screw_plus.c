@@ -12,11 +12,14 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
+ #include <stdint.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include "php_screw_plus.h"
-#include "cauthcode.c"
+#include "md5.h"
+#include "aes.c"
+#include "aes_crypt.c"
 
 PHP_MINIT_FUNCTION(php_screw_plus);
 PHP_MSHUTDOWN_FUNCTION(php_screw_plus);
@@ -26,25 +29,35 @@ FILE *pm9screw_ext_fopen(FILE *fp)
 {
 	struct	stat	stat_buf;
 	char	*datap, *newdatap;
+	char lenBuf[16];
 	int	datalen, newdatalen=0;
 	int	i;
+	uint8_t enTag[16];
+	uint8_t key[64];
+	memset(key, 0, sizeof(key));
+	memcpy(key, md5(CAKEY), 32);
+    	memcpy(enTag, key, 16);
 
+    	memset(lenBuf, 0, 16);
 	fstat(fileno(fp), &stat_buf);
 	datalen = stat_buf.st_size;
 	datap = (char*)malloc(maxBytes);
+	memset(datap, 0, sizeof(datap));
 	fread(datap, datalen, 1, fp);
 	fclose(fp);
-	if(datalen > 32) {
-		newdatap = cAuthCode(datap,false,CAKEY,0,32);
-		newdatalen = strlen(newdatap);
+	if(memcmp(datap, enTag, 16) == 0) {
+		for(i=16; i<datalen; i++) {
+			if(i<32)
+				lenBuf[i-16] = datap[i];
+			else
+				datap[i-32] = datap[i];
+		}
+		screw_aes(0,datap,datalen,key,&datalen);
+		datalen = atoi(lenBuf);
 	}
 	fp = tmpfile();
 
-	if(newdatalen>0) {
-		fwrite(newdatap, newdatalen, 1, fp);
-		free(newdatap);
-	}else
-		fwrite(datap, datalen, 1, fp);
+	fwrite(datap, datalen, 1, fp);
 	free(datap);
 
 	rewind(fp);
@@ -71,7 +84,7 @@ ZEND_API zend_op_array *pm9screw_compile_file(zend_file_handle *file_handle, int
 		}
 	}
 
-	fp = fopen(file_handle->filename, "r");
+	fp = fopen(file_handle->filename, "rb");
 	if (!fp) {
 		return org_compile_file(file_handle, type);
 	}

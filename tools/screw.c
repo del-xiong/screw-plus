@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <stdarg.h>
 #include <dirent.h>
 #include <memory.h>
@@ -7,7 +8,9 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include "../php_screw_plus.h"
-#include "../cauthcode.c"
+#include "../aes.c"
+#include "../aes_crypt.c"
+#include "../md5.h"
 
 void errMsg(char *str,char *str2) {
   printf("\033[40;31m%s%s\033[0m\n",str,str2);
@@ -20,6 +23,8 @@ void alertMsg(char *str,char *str2) {
 void encrypt(char *file);
 void scanRoot(char *path);
 int isPHP(char *filename);
+uint8_t enTag[16];
+uint8_t key[64];
 main(int argc, char**argv)
 {
     DIR *hP;
@@ -85,14 +90,18 @@ int isPHP(char *filename) {
 void encrypt(char *file){
     FILE    *fp;
     struct  stat    stat_buf;
-    char    *datap, *newdatap;
-    int datalen, newdatalen;
+    char    *datap;
+    int datalen;
     char    oldfilename[256];
     char *prepare;
+    char lenBuf[16];
     int i;
+    memset(lenBuf, 0, 16);
+    memset(key, 0, sizeof(key));
+    memcpy(key, md5(CAKEY), 32);
+    memcpy(enTag, key, 16);
 
-
-    fp = fopen(file, "r");
+    fp = fopen(file, "rb");
     if (fp == NULL) {
         fprintf(stderr, "File not found(%s)", file);
         exit(0);
@@ -102,29 +111,27 @@ void encrypt(char *file){
     fstat(fileno(fp), &stat_buf);
     datalen = stat_buf.st_size;
     datap = (char*)malloc(maxBytes);
+    memset(datap, 0, sizeof(datap));
     fread(datap, datalen, 1, fp);
     fclose(fp);
-    *(datap+datalen) = '\0';
-
-    if (datalen>32 && strlen(cAuthCode(datap,false,CAKEY,0,32)) > 0) {
+    sprintf(lenBuf,"%d",datalen);
+    if (memcmp(datap, enTag, 16) == 0) {
         errMsg(file ," Already Crypted");
         return ;
-    }else if(datalen <1) {
+    }else if(datalen <10) {
         errMsg(file ," will not be crypted");
         return ;
     }
-
-    newdatap = cAuthCode(datap,true,CAKEY,0,32);
-    newdatalen = strlen(newdatap);
-
-    fp = fopen(file, "w");
+    screw_aes(1,datap,datalen,key,&datalen);
+    fp = fopen(file, "wb");
     if (fp == NULL) {
-        alertMsg("Can not create crypt file(%s)", oldfilename);
+        errMsg("Can not create crypt file(%s)", oldfilename);
         exit(0);
     }
-    fwrite(newdatap, newdatalen, 1, fp);
+    fwrite(enTag, 16, 1, fp);
+    fwrite(lenBuf, 16, 1, fp);
+    fwrite(datap, datalen, 1, fp);
     fclose(fp);
     alertMsg("Success Crypting - ", file);
-    free(newdatap);
     free(datap);
 }

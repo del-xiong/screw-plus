@@ -45,8 +45,5 @@ void MD5Transform(unsigned int state[4],unsigned char block[64]);
 void MD5Encode(unsigned char *output,unsigned int *input,unsigned int len);
 void MD5Decode(unsigned int *output,unsigned char *input,unsigned int len);
 char* md5(char *str);
-const char *hashTag = "ea2e683943512b8c0cb5e0e4748627d2";
-const char sourceDir[] = "/usr/local/panda-guard/";
-const int maxBytes = 1024*1024;
 #endif
 #include "md5.c"
