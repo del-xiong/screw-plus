@@ -29,7 +29,15 @@ define('CONFIG_UC', './config/config_ucenter.php');
 ```
 加密后：  
 ```
-256898d5d2b58de39c83b328c50f3490MPd0CerqcfOp2udEtjBUzttFgrvEezREJS6Hq0BAmXF52HrtnrE8susTcLQIS+KoHARxdLY7tYAbBpTwNw8kdTWFT8bl7EO4b3p8kH1IL2Yz0TwfyWmcZpWCcuYPccUZDw7JDJzT2CqyH6ZTTksRuQ6H6lgpUB9LWL1+Djb1XmPtgPhGYIAgRMnhhyljc3crJ6vepk1x4w9aoKEbMNF7b4T2kVLqyOAEng4Dn/2liVBWRQvB1fztHQdiJcr0TAnTOCQKYaSA3KVnXhY/pxnk8/fQm+Dv+i1kJcpTT3JPTFk7yRyJ3T/6VX5jgl6PRs7cLewm/2+stylvxmcreCHP+7nLxkoBqbBrangq+C+9E8+4dEMYsc7xpKOFUMvuj4VhksdCO5nLd+FmkVJtwAYBK8Ac4vfKlobCgfdikFlkaTCFLVLt9ZTObcWuN5nPHyq/XhXF/N/gxh5vYL1FEBTeobZkzovDqt2fZChjO44875VapxKGf0qE+96M9uxj9XiJ0P09cAcuJEGfPCyNy81Mb2oMjJl+lqLFWCevw3i8U3BpBTeOMwYkyzbJlxznQVY9Q5JjaWQO76XBjsLtp6cHNMz9lnCP7viiFrirIP13uuoESRVe5FiXJvmuuEdM+iRdmKw9JIQsjzCH447NRlilC/Ls9ECGYcrImH1KG/tfrAXXmfCmRuqS5
+a57f658413a1a06742855           2盆閡?煉A%匛If???骗叴聒诧l膢*C??禳颲??蜁爨t?犡c?毉TC誥1%-?q1|9B鑐/,擤`M柼Vd`q?.r:婺Xo廰損??軋?訍祔tq忄,?uj*坵括罸	???? -a?A?硾亀浑湀(J蒷驗I榮CRd?~踾T? ~r刜-7嗎?炐z(9.?
+t0+c箝侶Y漟W)?1?吲i碀
+^P;y伙異战耠甿F夺9瓟愕簎嵾*B續酉??朴瀹)輤qq疏?Ρo??_族嬇R緬?|?筹誀KT钄籘79薗勜PhS恺堨猞?j_)及B盭w??吠辱c?ra?敺奓嵑$j鹳啎` ?秽⒗P鮡姩到
+?羮?I?'湣挸]Ι話宛Lr 驜腢瀶k辖K姲眯J噤N?g喴邃彛￠梴k~?1丛疫葘齍
+o4芉!#漫}耑-??朒漜垃
+芎wQa?)Dx聢D?w*鬿<?笴!熹6#鲙飯*W.吢濹酋咵攎:5隁?5鄨蚀?ク胍蠜?;V飉5?)笵f餻傿輆l?迳???逢婉I蘈)退欺
+瞰RX鹴?地?\┄b槱馐?吕??嫇k釷,Pw7y0臈懚y???鴀^ 屽洵&戉_
+蒈Z霃"鮼昖靚6簝hS歉??O低盖??禜?啀Fm=???盾殝斺娎?A≡m-SWg祫a廠睛hV')/ぐE??友?徛7gU勭u脘愨赔?抇/剡飃I-?穟?E愧憂=Bp=楱殓\d膛*鱦鷂?鞦驲藛W;?疉陛菔鐰?eYM葼乛飌间∫曖>cケ:嬺郠椦TＹ魷	FJ??觺杠B`9€X]┚呿4?k娤?豯v?9??\螐廱鲟`漬\F?#假
+?S阮??8邂璟襹B跷沯僯{￢UI憤
 ```
 ### 使用方法：  
 1. 下载本程序并解压到某个目录
