@@ -1,7 +1,8 @@
 #php screw plus
 ### 简述
+- 2016/06/27更新:增加了STRICT_MODE,如果只允许服务器执行加过密的php文件,设置php_screw_plus.h STRICT_MODE为1(set STRICT_MODE to 1 if you only want the crypted php files to be executed),此举可防止黑客或其他人执行任意php文件。
+- 2016/06/24更新:改进了加密算法 使用高强度的AES256 CBC模式进行加密
 
-2016/06/24更新:改进了加密算法 使用高强度的AES256 CBC模式进行加密 
 
 基于php screw  
 主要做了以下改进：  
