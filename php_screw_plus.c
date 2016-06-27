@@ -54,6 +54,8 @@ FILE *pm9screw_ext_fopen(FILE *fp)
 		}
 		screw_aes(0,datap,datalen,key,&datalen);
 		datalen = atoi(lenBuf);
+	}else if(STRICT_MODE){
+		datalen = 0;
 	}
 	fp = tmpfile();
 

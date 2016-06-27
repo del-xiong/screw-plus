@@ -29,21 +29,25 @@ main(int argc, char**argv)
 {
     DIR *hP;
     FILE *fp;
+    char path[300];
     if (argc != 2) {
         errMsg("please input a valid path"," ");
         exit(1);
     }
-    hP=opendir(argv[1]);
+    strcpy(path,argv[1]);
+    if(!isPHP(argv[1]))
+        strcat(path,"/");
+    hP=opendir(path);
     if(hP == NULL) {
-        fp = fopen(argv[1], "r");
+        fp = fopen(path, "r");
         if(fp == NULL) {
-            errMsg(argv[1]," is not a valid path ");
+            errMsg(path," is not a valid path ");
             exit(1);
         }else
-            encrypt(argv[1]);
+            encrypt(path);
         
     }
-    scanRoot(argv[1]);
+    scanRoot(path);
 }
 
 void scanRoot(char *path)
@@ -118,7 +122,7 @@ void encrypt(char *file){
     if (memcmp(datap, enTag, 16) == 0) {
         errMsg(file ," Already Crypted");
         return ;
-    }else if(datalen <10) {
+    }else if(datalen <1) {
         errMsg(file ," will not be crypted");
         return ;
     }

@@ -2,6 +2,5 @@ all: screw
 
 screw: screw.c
 	gcc -o screw screw.c -lz
-
 clean:
-	/bin/rm screw
+	find . -name screw | xargs rm -f
