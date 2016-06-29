@@ -1,13 +1,15 @@
-#php screw plus
+#php screw plus  
 
 github https://github.com/del-xiong/screw-plus  
 oschina http://git.oschina.net/splot/php-screw-plus  
 
 详细配置教程 http://www.jianshu.com/p/f6425e2f8643 (使用screw plus来保护php代码安全)
 
+**交流QQ群 530887505**  
+
 ### 简述
-- 2016/06/27更新:增加了STRICT_MODE,如果只允许服务器执行加过密的php文件,设置php_screw_plus.h STRICT_MODE为1(set STRICT_MODE to 1 if you only want the crypted php files to be executed),此举可防止黑客或其他人执行任意php文件。
-- 2016/06/24更新:改进了加密算法 使用高强度的AES256 CBC模式进行加密
+- 2016/06/27更新:增加了STRICT_MODE,如果只允许服务器执行加过密的php文件,设置php_screw_plus.h STRICT_MODE为1(set STRICT_MODE to 1 if you only want the crypted php files to be executed),此举可防止黑客或其他人执行任意php文件。  
+- 2016/06/24更新:改进了加密算法 使用高强度的AES256 CBC模式进行加密  
 
 
 基于php screw  

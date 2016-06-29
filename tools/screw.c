@@ -20,7 +20,7 @@ void alertMsg(char *str,char *str2) {
   printf("\033[1;32m%s%s\033[0m\n",str,str2);
 }
 
-void encrypt(char *file);
+void screw_encrypt(char *file);
 void scanRoot(char *path);
 int isPHP(char *filename);
 uint8_t enTag[16];
@@ -30,12 +30,13 @@ main(int argc, char**argv)
     DIR *hP;
     FILE *fp;
     char path[300];
+    char suf[1];
     if (argc != 2) {
         errMsg("please input a valid path"," ");
         exit(1);
     }
     strcpy(path,argv[1]);
-    if(!isPHP(argv[1]))
+    if(!isPHP(argv[1]) && path[strlen(path)-1]!='/')
         strcat(path,"/");
     hP=opendir(path);
     if(hP == NULL) {
@@ -44,7 +45,7 @@ main(int argc, char**argv)
             errMsg(path," is not a valid path ");
             exit(1);
         }else
-            encrypt(path);
+            screw_encrypt(path);
         
     }
     scanRoot(path);
@@ -75,7 +76,7 @@ void scanRoot(char *path)
             scanRoot(curPath);
         }else
         if(isPHP(dir->d_name) && dir->d_type == 8){
-            encrypt(curPath);
+            screw_encrypt(curPath);
         } 
     }
 }
@@ -91,7 +92,7 @@ int isPHP(char *filename) {
     return strncmp(tmpS,".php",4)==0?1:0;
 }
 
-void encrypt(char *file){
+void screw_encrypt(char *file){
     FILE    *fp;
     struct  stat    stat_buf;
     char    *datap;
