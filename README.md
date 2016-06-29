@@ -1,7 +1,7 @@
 #php screw plus
 
-github https://github.com/del-xiong/screw-plus
-oschina http://git.oschina.net/splot/php-screw-plus
+github https://github.com/del-xiong/screw-plus  
+oschina http://git.oschina.net/splot/php-screw-plus  
 
 详细配置教程 http://www.jianshu.com/p/f6425e2f8643 (使用screw plus来保护php代码安全)
 
