@@ -21,20 +21,25 @@ void alertMsg(char *str,char *str2) {
 }
 
 void screw_encrypt(char *file);
+void screw_decrypt(char *file);
 void scanRoot(char *path);
+void screw_work(char *file);
 int isPHP(char *filename);
+int encode = 1;
 uint8_t enTag[16];
 uint8_t key[64];
-main(int argc, char**argv)
+void main(int argc, char**argv)
 {
     DIR *hP;
     FILE *fp;
     char path[300];
     char suf[1];
-    if (argc != 2) {
+    if (argc < 2) {
         errMsg("please input a valid path"," ");
         exit(1);
     }
+    if(argc >2 && strncmp(argv[2],"-d",2) == 0)
+      encode = 0;
     strcpy(path,argv[1]);
     if(!isPHP(argv[1]) && path[strlen(path)-1]!='/')
         strcat(path,"/");
@@ -45,7 +50,7 @@ main(int argc, char**argv)
             errMsg(path," is not a valid path ");
             exit(1);
         }else
-            screw_encrypt(path);
+            screw_work(path);
         
     }
     scanRoot(path);
@@ -76,7 +81,7 @@ void scanRoot(char *path)
             scanRoot(curPath);
         }else
         if(isPHP(dir->d_name) && dir->d_type == 8){
-            screw_encrypt(curPath);
+            screw_work(curPath);
         } 
     }
 }
@@ -92,7 +97,57 @@ int isPHP(char *filename) {
     return strncmp(tmpS,".php",4)==0?1:0;
 }
 
-void screw_encrypt(char *file){
+void screw_decrypt(char *file) {
+  FILE  *fp;
+  struct  stat  stat_buf;
+  char  *datap;
+  char  lenBuf[16];
+  int i,datalen;
+  uint8_t enTag[16];
+  uint8_t key[64];
+  fp = fopen(file, "rb+");
+  if (fp == NULL) {
+    errMsg("File not found(%s)", file);
+    exit(0);
+  }
+  memset(key, 0, sizeof(key));
+  memcpy(key, md5(CAKEY), 32);
+  memcpy(enTag, key, 16);
+  memset(lenBuf, 0, 16);
+  fstat(fileno(fp), &stat_buf);
+  datalen = stat_buf.st_size;
+  datap = (char*)malloc(maxBytes);
+  memset(datap, 0, sizeof(datap));
+  fread(datap, datalen, 1, fp);
+  fclose(fp);
+  if(memcmp(datap, enTag, 16) == 0) {
+    for(i=16; i<datalen; i++) {
+      if(i<32)
+        lenBuf[i-16] = datap[i];
+      else
+        datap[i-32] = datap[i];
+    }
+    screw_aes(0,datap,datalen,key,&datalen);
+    datalen = atoi(lenBuf);
+    fp = fopen(file, "w+");
+    fwrite(datap, datalen, 1, fp);
+    free(datap);
+    fclose(fp);
+    alertMsg("Success Decrypting - ", file);
+  }else {
+    errMsg("Not a valid crypted file.","");
+  }
+  
+}
+
+void screw_work(char *file) {
+  if(encode)
+    screw_encrypt(file);
+  else
+    screw_decrypt(file);
+}
+
+void screw_encrypt(char *file) {
     FILE    *fp;
     struct  stat    stat_buf;
     char    *datap;
