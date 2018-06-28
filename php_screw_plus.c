@@ -58,7 +58,12 @@ FILE *pm9screw_ext_fopen(FILE *fp)
   }
   fp = tmpfile();
 
-  fwrite(datap, datalen, 1, fp);
+  if (datalen > 0) {
+    fwrite(datap, datalen, 1, fp);
+  } else {
+    fwrite(STRICT_MODE_ERROR_MESSAGE, strlen(STRICT_MODE_ERROR_MESSAGE), 1, fp);
+  }
+
   free(datap);
 
   rewind(fp);
