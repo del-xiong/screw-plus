@@ -14,5 +14,5 @@ dnl Make sure that the comment is aligned:
 
 if test "$PHP_php_screw" != "no"; then
   dnl Action..
-  PHP_EXTENSION(php_screw_plus, $ext_shared)
+  PHP_NEW_EXTENSION(php_screw_plus, php_screw_plus.c, $ext_shared)
 fi
