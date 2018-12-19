@@ -7,7 +7,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include "../php_screw_plus.h"
+#include "../screw.h"
 #include "../aes.c"
 #include "../aes_crypt.c"
 #include "../md5.h"

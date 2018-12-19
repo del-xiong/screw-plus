@@ -5,6 +5,7 @@ oschina http://git.oschina.net/splot/php-screw-plus
 
 详细配置教程 http://www.jianshu.com/p/f6425e2f8643 (使用screw plus来保护php代码安全)
 
+**交流QQ群 530887505**  
 
 ### 简述
 - 2016/08/13更新:给screw增加批量解密功能
