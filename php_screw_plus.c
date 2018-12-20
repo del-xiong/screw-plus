@@ -107,22 +107,6 @@ ZEND_API zend_op_array *pm9screw_compile_file(zend_file_handle *file_handle, int
   return org_compile_file(file_handle, type);
 }
 
-/*zend_module_entry php_screw_plus_module_entry = {
-#if ZEND_MODULE_API_NO >= 20010901
-  STANDARD_MODULE_HEADER,
-#endif
-  "php_screw_plus",
-  NULL,
-  PHP_MINIT(php_screw_plus),
-  PHP_MSHUTDOWN(php_screw_plus),
-  NULL,
-  NULL,
-  PHP_MINFO(php_screw_plus),
-#if ZEND_MODULE_API_NO >= 20010901
-  "1.5.0", 
-#endif
-  STANDARD_MODULE_PROPERTIES
-};*/
 zend_module_entry php_screw_plus_module_entry = {
 #if ZEND_MODULE_API_NO >= 20010901
   STANDARD_MODULE_HEADER,
