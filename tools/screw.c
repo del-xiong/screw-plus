@@ -64,6 +64,7 @@ void scanRoot(char *path)
     int i;
     int l = 0;
     hP=opendir(path);
+    struct stat stat_buf;
     if(hP == NULL)
         return;
     while (NULL != (dir=readdir(hP)))
@@ -75,14 +76,15 @@ void scanRoot(char *path)
         memset(curPath,0,sizeof(curPath));
         strcat(curPath,path);
         strcat(curPath,dir->d_name);
-        if(dir->d_type == 4){
+        stat(curPath, &stat_buf);
+        // if it is a folder
+        if (S_ISDIR(stat_buf.st_mode)) {
             if(curPath[l-1] != '/')
                 strcat(curPath,"/");
             scanRoot(curPath);
-        }else
-        if(isPHP(dir->d_name) && dir->d_type == 8){
-            screw_work(curPath);
-        } 
+        } else if (isPHP(dir->d_name)) {
+          screw_work(curPath);
+        }
     }
 }
 
