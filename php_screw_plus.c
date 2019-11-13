@@ -76,7 +76,11 @@ ZEND_API zend_op_array *pm9screw_compile_file(zend_file_handle *file_handle, int
 {
   FILE  *fp;
   char  fname[32];
-
+  
+  if (!file_handle || !file_handle->filename || strstr(file_handle->filename, ".phar") || strstr(file_handle->filename, "phar://")) {
+  f  return org_compile_file(file_handle, type);
+  }
+  
   memset(fname, 0, sizeof fname);
   if (zend_is_executing(TSRMLS_C)) {
     if (get_active_function_name(TSRMLS_C)) {
