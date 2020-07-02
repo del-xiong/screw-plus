@@ -52,7 +52,7 @@ o4芉!#漫}耑-??朒漜垃
 ### 使用方法：  
 1. 下载本程序并解压到某个目录
 2. 在screw plus目录中执行php bin中的phpize自动生成扩展所需文件（如果你的php里没有可以去官网下载）
-3. 执行./configure --with-php=config=[php config path] 进行配置，[php config path]是你的php-config的绝对路径
+3. 执行./configure --with-php-config=[php config path] 进行配置，[php config path]是你的php-config的绝对路径
 4. 修改php_screw_plus.h中的CAKEY，改为一个你认为安全的字符串
 5. 执行make生成扩展 modules/php_screw_plus.so
 6. 把扩展路径加入php.ini中 重启php
