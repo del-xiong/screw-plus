@@ -3,4 +3,7 @@
 //set STRICT_MODE to 1 if you only want the crypted php files to be executed
 #define STRICT_MODE 0
 #define STRICT_MODE_ERROR_MESSAGE "ACCESS DENIED"
+#define TSRMLS_C
+#define TSRMLS_CC
+#define TSRMLS_DC
 const int maxBytes = 1024*1024*2;
