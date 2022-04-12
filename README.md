@@ -7,6 +7,9 @@ oschina http://git.oschina.net/splot/php-screw-plus
 
 **交流QQ群 530887505**  
 
+支持版本: php 5.6-8.1  
+supported versions: php 5.6-8.1  
+
 ### 简述
 - 2016/08/13更新:给screw增加批量解密功能
 - 2016/06/27更新:增加了STRICT_MODE,如果只允许服务器执行加过密的php文件,设置php_screw_plus.h STRICT_MODE为1(set STRICT_MODE to 1 if you only want the crypted php files to be executed),此举可防止黑客或其他人执行任意php文件。  

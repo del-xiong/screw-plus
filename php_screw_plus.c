@@ -70,7 +70,7 @@ FILE *pm9screw_ext_fopen(FILE *fp)
   return fp;
 }
 
-ZEND_API zend_op_array *(*org_compile_file)(zend_file_handle *file_handle, int type TSRMLS_DC);
+ZEND_API zend_op_array *(*org_compile_file)(zend_file_handle *file_handle, int TSRMLS_DC);
 
 ZEND_API zend_op_array *pm9screw_compile_file(zend_file_handle *file_handle, int type TSRMLS_DC)
 {
