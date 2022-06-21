@@ -40,7 +40,7 @@ FILE *pm9screw_ext_fopen(FILE *fp)
   memset(lenBuf, 0, 16);
   fstat(fileno(fp), &stat_buf);
   datalen = stat_buf.st_size;
-  datap = (char*)malloc(maxBytes);
+  datap = (char*)malloc(datalen + 16);
   memset(datap, 0, sizeof(datap));
   fread(datap, datalen, 1, fp);
   fclose(fp);
