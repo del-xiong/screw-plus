@@ -6,4 +6,3 @@
 #define TSRMLS_C
 #define TSRMLS_CC
 #define TSRMLS_DC
-const int maxBytes = 1024*1024*2;
