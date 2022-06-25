@@ -118,7 +118,7 @@ void screw_decrypt(char *file) {
   memset(lenBuf, 0, 16);
   fstat(fileno(fp), &stat_buf);
   datalen = stat_buf.st_size;
-  datap = (char*)malloc(maxBytes);
+  datap = (char*)malloc(datalen);
   memset(datap, 0, sizeof(datap));
   fread(datap, datalen, 1, fp);
   fclose(fp);
@@ -172,7 +172,7 @@ void screw_encrypt(char *file) {
 
     fstat(fileno(fp), &stat_buf);
     datalen = stat_buf.st_size;
-    datap = (char*)malloc(maxBytes);
+    datap = (char*)malloc(datalen);
     memset(datap, 0, sizeof(datap));
     fread(datap, datalen, 1, fp);
     fclose(fp);
