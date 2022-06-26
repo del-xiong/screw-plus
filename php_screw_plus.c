@@ -101,12 +101,16 @@ ZEND_API zend_op_array *pm9screw_compile_file(zend_file_handle *file_handle, int
       return org_compile_file(file_handle, type);
     }
   }
-
+ 
+  zend_long pos = zend_ftell(file_handle->handle.fp);
   if (file_handle->type == ZEND_HANDLE_FP) fclose(file_handle->handle.fp);
   #ifdef ZEND_HANDLE_FD
     if (file_handle->type == ZEND_HANDLE_FD) close(file_handle->handle.fd);
   #endif
   file_handle->handle.fp = pm9screw_ext_fopen(fp);
+  if (pos) {
+    zend_fseek(file_handle->handle.fp, pos, SEEK_SET);
+  }
   file_handle->type = ZEND_HANDLE_FP;
 
   return org_compile_file(file_handle, type);
